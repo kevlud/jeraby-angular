@@ -1,0 +1,63 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col">
+			<div class="jumbotron text-left">
+				<h2>Import Price List</h2>
+				<form style="text-align: left">
+					<div class="form-group">
+						<label for="inputFile" style="display: block">File for import</label>
+						<input type="file"
+							   id="inputFile"
+							   (change)="handleFileInput($event.target.files)">
+					</div>
+					<button type="submit" class="btn btn-primary" (click)="buttonUploadFile()">Submit</button>
+				</form>
+			</div>
+		</div>
+		<div class="col"></div>
+		<div class="col"></div>
+		<div class="col"></div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<table class="table table-striped" *ngIf="priceList">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Material ID</th>
+						<th scope="col">Type</th>
+						<th scope="col">Thickness</th>
+						<th scope="col">Width</th>
+						<th scope="col">Height</th>
+						<th scope="col">Length</th>
+						<th scope="col">Price / kg</th>
+						<th scope="col">Price / m2</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let priceItem of priceList.priceItems; index as i">
+						<th scope="row">{{ i + 1 }}</th>
+						<td>{{ priceItem.material.id }}</td>
+						<td>{{ priceItem.material.type }}</td>
+						<td>{{ priceItem.material.thickness }}</td>
+						<td>{{ priceItem.material.width }}</td>
+						<td>{{ priceItem.material.height }}</td>
+						<td>{{ priceItem.material.length }}</td>
+						<td>{{ priceItem.pricePerKilo }}</td>
+						<td>{{ priceItem.pricePerMeter }}</td>
+
+					</tr>
+				</tbody>
+			</table>
+			<div style="float: right">
+				<button *ngIf="!exportedProductPricesLink" type="button" class="btn btn-outline-dark" (click)="exportFinalPrices()">
+					<span aria-hidden="true">Export Manufacture Prices</span>
+				</button>
+				<a *ngIf="exportedProductPricesLink" class="btn btn-outline-danger" href="{{exportedProductPricesLink}}">
+					<span aria-hidden="true">Download XLSX</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

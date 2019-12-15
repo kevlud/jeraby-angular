@@ -1,0 +1,16 @@
+type Permission {
+    id: ID!
+    name: String!
+}
+
+type User {
+    id: ID!
+    email: String!
+    firstName: String!
+    lastName: String!
+    permissions: [Permission]!
+}
+
+mutation {
+    login: User
+}

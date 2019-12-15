@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <div class="jumbotron text-center">
+        <h1>
+            <span>{{ product.name + ' ' + product.model }}</span>
+        </h1>
+        <h2>
+            <span>Selling Price: {{ product.sellPrice }} €</span>
+        </h2>
+        <h2>
+            <span>Manufacturing Price: {{ product.manufacturePrice }} €</span>
+        </h2>
+    </div>
+
+    <div class="asseblyListDetail" *ngFor="let assemblyList of product.assemblyLists; index as i">
+        <div>
+            <h4>{{ assemblyList.name }}</h4>
+            <h4>Manufacturing Price:  {{ assemblyList.manufacturePrice | number }} €</h4>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Material Type</th>
+                    <th scope="col">Height</th>
+                    <th scope="col">Width</th>
+                    <th scope="col">Length</th>
+                    <th scope="col">Thickness</th>
+                    <th scope="col">Manufacture price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let part of assemblyList.parts; index as i">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ part.material.type }}</td>
+                    <td>{{ part.height }}</td>
+                    <td>{{ part.width }}</td>
+                    <td>{{ part.length }}</td>
+                    <td>{{ part.thickness }}</td>
+                    <td>{{ part.price | number }} €</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>

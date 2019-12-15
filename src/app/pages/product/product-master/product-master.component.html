@@ -1,0 +1,71 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col">
+			<div class="jumbotron text-left">
+				<h2>Export Priced Products</h2>
+				<div>
+					<button *ngIf="!exportedProductPricesLink" type="button" class="btn btn-outline-dark" (click)="exportFinalPrices()">
+						<span aria-hidden="true">Export Manufacture Prices</span>
+					</button>
+					<a *ngIf="exportedProductPricesLink" class="btn btn-outline-danger" href="{{exportedProductPricesLink}}">
+						<span aria-hidden="true">Download XLSX</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="jumbotron text-left">
+				<h2>Import Assembly List</h2>
+				<form style="text-align: left">
+					<div class="form-group">
+						<label for="inputFile" style="display: block">File for import</label>
+						<input type="file"
+							   id="inputFile"
+							   (change)="handleFileInput($event.target.files)">
+					</div>
+					<button type="submit" class="btn btn-primary" (click)="buttonUploadFile()">Submit</button>
+				</form>
+			</div>
+		</div>
+		<div class="col"></div>
+		<div class="col"></div>
+	</div>
+	<div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Name</th>
+					<th scope="col">Model</th>
+					<th scope="col">Buyer</th>
+					<th scope="col">Weight</th>
+					<th scope="col">Sell price</th>
+					<th scope="col">Manufacture price</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let product of products; index as i">
+					<th scope="row">{{ i + 1 }}</th>
+					<td>{{ product.name }}</td>
+					<td>{{ product.model }}</td>
+					<td>{{ product.buyer }}</td>
+					<td>{{ product.weight | number }}</td>
+					<td>{{ product.sellPrice | number }}</td>
+					<td>{{ product.manufacturePrice | number }}</td>
+					<td>
+						<a
+								class="nav-item nav-link text-uppercase"
+								routerLink="/product/{{ product.id }}"
+								routerLinkActive="active"
+						>
+							<i class="fas fa-tick"></i>
+							<span translate>Detail</span>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</div>
